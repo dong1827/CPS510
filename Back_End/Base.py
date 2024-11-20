@@ -334,21 +334,120 @@ def dummy_data():
 @app.route('/query', methods = ['post'])
 #Return the query result
 def query(): 
-    res_body = {"query": ""}
+    res_body = {"result": "Success"}
 
-    if ("user" not in session):
-        return res_body
-    
     data = request.get_json()
     query = data.get("query")
 
-    sql = f"SELECT * FROM {query}"
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(sql)
+    try:
+        sql = f"SELECT * FROM {query}"
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(sql)
+
+        columns = [col[0] for col in cursor.description] 
+        rows = cursor.fetchall()
+
+        # Step 5: Format the response
+        res_body["columns"] = columns
+        res_body["rows"] = rows
+
+        return res_body
     
-    names = cursor.description[0]
-    result = cursor.fetchall()
+    except oracledb.DatabaseError as e:
+        error_obj, = e.args
+        res_body["result"] = error_obj.message
+        res_body["rows"] = ""
+        res_body["columns"] = ""
+
+        return res_body
+ 
+    finally:
+        if conn:
+            conn.close()
+
+@app.route('/advQuery', methods = ['post'])
+def adv_query(): 
+    res_body = {"result": "Success"}
+
+    data = request.get_json()
+    query = int(data.get("query"))
+
+    sql_statements = [
+        """SELECT DISTINCT C.Username AS "Customer"
+        FROM Customer C
+        WHERE EXISTS (
+            SELECT 1 
+            FROM Records R 
+            JOIN Product P ON R.ProductID = P.ProductID
+            WHERE C.Username = R.Customer 
+            AND P.Type = 'Music'
+        )
+        AND EXISTS (
+            SELECT 1 
+            FROM Records R 
+            JOIN Product P ON R.ProductID = P.ProductID
+            WHERE C.Username = R.Customer 
+            AND P.Type = 'Movie'
+        )""",
+
+        """SELECT DISTINCT C.Username AS "Customer"
+        FROM Customer C
+        JOIN Review R ON C.Username = R.Customer
+        UNION
+        SELECT DISTINCT C.Username AS "Customer"
+        FROM Customer C
+        JOIN Records RD ON C.Username = RD.Customer""",
+
+        """SELECT S.StoreID AS "Store ID", COUNT(R.ProductID) AS "Total Products Sold"
+        FROM Records R
+        JOIN Stores S ON R.StoreID = S.StoreID
+        GROUP BY S.StoreID
+        HAVING COUNT(R.ProductID) > 2""",
+
+        """SELECT P.ProductID AS "Product ID", P.Title AS "Product Title"
+        FROM Product P
+        JOIN Review R ON P.ProductID = R.Product
+        MINUS
+        SELECT P.ProductID AS "Product ID", P.Title AS "Product Title"
+        FROM Product P
+        JOIN Records R ON P.ProductID = R.ProductID
+        WHERE R.Customer = 'john_doe'""",
+
+        """SELECT S.StoreID AS "Store ID", P.Type AS "Product Type", AVG(P.Price) AS "Average Price"
+        FROM Product P
+        JOIN Records R ON P.ProductID = R.ProductID
+        JOIN Stores S ON R.StoreID = S.StoreID
+        WHERE P.Type IN ('Music', 'Movie')
+        GROUP BY S.StoreID, P.Type"""
+    ]
+
+    try:
+        sql = sql_statements[query]
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute(sql)
+
+        columns = [col[0] for col in cursor.description] 
+        rows = cursor.fetchall()
+
+        # Step 5: Format the response
+        res_body["columns"] = columns
+        res_body["rows"] = rows
+
+        return res_body
+    
+    except oracledb.DatabaseError as e:
+        error_obj, = e.args
+        res_body["result"] = error_obj.message
+        res_body["rows"] = ""
+        res_body["columns"] = ""
+
+        return res_body
+ 
+    finally:
+        if conn:
+            conn.close()
 
 
 if __name__ == "__main__":

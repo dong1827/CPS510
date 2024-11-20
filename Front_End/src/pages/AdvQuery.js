@@ -3,21 +3,21 @@ import React, { useState } from 'react'
 import DataTable from '../components/DataTable';
 import HomeButton from '../components/HomeButton';
 
-function Query() {
+function AdvQuery() {
     const [msg, setMsg] = useState("");
-    const [query, setQuery] = useState("customer");
+    const [query, setQuery] = useState("0");
     const [result, setResult] = useState("");
     const [rows, setRows] = useState("");
     const [cols, setCols] = useState("");
     
 
-    const fetchQuery = async () => {
+    const fetchAdvQuery = async () => {
         setMsg("Loading...");
         try {
             
             const respose = await axios({
                 method: "post",
-                url: "http://localhost:5000/query",
+                url: "http://localhost:5000/advQuery",
                 withCredentials: true,
                 data: {
                     query: query
@@ -54,22 +54,16 @@ function Query() {
         <div>
             <HomeButton />
             <h2>Select your query</h2>
-            <label htmlFor='query'>Select a table to view:</label>
-            <select id="query" value={query} onChange={selectQuery}>
-                <option value="customer">Customers</option>
-                <option value="employee">Employee</option>
-                <option value="product">Products</option>
-                <option value="genre">Genre</option>
-                <option value="movie">Movie</option>
-                <option value="music">Music</option>
-                <option value="records">Records</option>
-                <option value="review">Review</option>
-                <option value="stocks">Stocks</option>
-                <option value="storecredit">StoreCredit</option>
-                <option value="stores">Stores</option>
+            <label htmlFor='AdvQuery'>Select a table to view:</label>
+            <select id="AdvQuery" value={query} onChange={selectQuery}>
+                <option value="0">Query 1: Customers who have Purchased Both Movies and Music</option>
+                <option value="1">Query 2: Customers Who Either Left a Review or Made a Purchase</option>
+                <option value="2">Query 3: Stores with More Than 2 Transactions</option>
+                <option value="3">Query 4: Products with Reviews but Not Purchased by 'john_doe'</option>
+                <option value="4">Query 5: Average Price of Music and Movies in Each Store</option>
             </select>
         
-            <button className='buttons' onClick={fetchQuery}>Select</button>
+            <button className='buttons' onClick={fetchAdvQuery}>Select</button>
 
             <div>
                 <p>{msg}</p>
@@ -82,4 +76,4 @@ function Query() {
     )
 }
 
-export default Query;
+export default AdvQuery;

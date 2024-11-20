@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-
+import HomeButton from '../components/HomeButton';
 
 function Manipulate() {
     const [result, setResult] = useState("");
-    
+    const [msg, setMsg] = useState("");
 
     const createTable = async () => {
+        setMsg("Loading...");
         try {
             const respose = await axios({
                 method: "post",
-                url: "https://cps510.onrender.com/create",
+                url: "http://localhost:5000/create",
                 withCredentials: true,
             });
 
@@ -23,13 +24,16 @@ function Manipulate() {
         catch (err) {
             console.log(err);
         }
+
+        setMsg("");
     }
 
     const dropTable = async () => {
+        setMsg("Loading...");
         try {
             const respose = await axios({
                 method: "post",
-                url: "https://cps510.onrender.com/drop",
+                url: "http://localhost:5000/drop",
                 withCredentials: true,
             });
 
@@ -42,12 +46,15 @@ function Manipulate() {
         catch (err) {
             console.log(err);
         }
+        setMsg("");
     }
 
     return (
         <div className='columnFlex'>
+            <HomeButton />
             <div className='centerJustified columnFlex'>
                 <p>Select your action</p>
+                <p>{msg}</p>
                 <p>{result}</p>
             </div>
             <div className='centerJustified'>

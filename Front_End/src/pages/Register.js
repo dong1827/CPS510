@@ -26,7 +26,7 @@ function Register() {
                 throw new Error('Password do not match')
             };
             //Send data to /register to handle registeration
-            const response = await axios.post('https://cps510.onrender.com/register',  { username, password });
+            const response = await axios.post('http://localhost:5000/register',  { username, password });
             setMsg(response.data['Msg'])
             console.log(response.data);
         } catch (error) {

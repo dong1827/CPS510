@@ -18,7 +18,7 @@ const Header: FC<HeaderProps> = ({}) => {
             try {
                 const response = await axios({
                     method: "get",
-                    url: ("https://cps510.onrender.com/session"),
+                    url: ("http://localhost:5000/session"),
                     withCredentials: true
                 });
                 

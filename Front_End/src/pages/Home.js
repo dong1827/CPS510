@@ -15,6 +15,16 @@ function QueryButton() {
     )
 }
 
+function AdvQueryButton() {
+    return (
+        <div> 
+            <Link to='advQuery'>
+                <button className='buttons'>Advanced Query</button>
+            </Link>
+        </div>
+    )
+}
+
 function InsertButton() {
     return (
         <div> 
@@ -59,6 +69,7 @@ function WelcomeHeader({user}) {
                 
                 <div className='rowFlex'> 
                     <QueryButton />
+                    <AdvQueryButton />
                     <ManipulateButton />
                     <InsertButton />
                 </div>
@@ -90,7 +101,7 @@ function Home() {
             try {
                 const response = await axios({
                     method: "get",
-                    url: ("https://cps510.onrender.com/session"),
+                    url: ("http://localhost:5000/session"),
                     withCredentials: true
                 });
 

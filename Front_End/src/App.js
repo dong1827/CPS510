@@ -6,6 +6,8 @@ import Register from './pages/Register';
 import Manipulate from './pages/Manipulate';
 import Insert from './pages/Insert';
 import Query from './pages/Query';
+import AdvQuery from './pages/AdvQuery';
+
 
 function App() {
 
@@ -18,6 +20,7 @@ function App() {
       <Route path='/manipulate' element={<Manipulate />} />
       <Route path='/insert' element={<Insert />} /> 
       <Route path='/query' element={<Query />} />
+      <Route path='/advQuery' element={<AdvQuery />} />
     </Routes>
   );
 }

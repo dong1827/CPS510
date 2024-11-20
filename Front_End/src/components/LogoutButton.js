@@ -11,7 +11,7 @@ function LogoutButton() {
         try {
             const response = await axios({
                 method: "post",
-                url: "https://cps510.onrender.com/logout",
+                url: "http://localhost:5000/logout",
                 withCredentials: true
             });
 
