@@ -18,7 +18,7 @@ const Header: FC<HeaderProps> = ({}) => {
             try {
                 const response = await axios({
                     method: "get",
-                    url: ("http://localhost:5000/session"),
+                    url: ("https://visually-talented-grubworm.ngrok-free.app/session"),
                     withCredentials: true
                 });
                 

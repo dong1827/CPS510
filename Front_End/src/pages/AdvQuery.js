@@ -17,7 +17,7 @@ function AdvQuery() {
             
             const respose = await axios({
                 method: "post",
-                url: "http://localhost:5000/advQuery",
+                url: "https://visually-talented-grubworm.ngrok-free.app/advQuery",
                 withCredentials: true,
                 data: {
                     query: query

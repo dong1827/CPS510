@@ -11,7 +11,7 @@ function LogoutButton() {
         try {
             const response = await axios({
                 method: "post",
-                url: "http://localhost:5000/logout",
+                url: "https://visually-talented-grubworm.ngrok-free.app/logout",
                 withCredentials: true
             });
 

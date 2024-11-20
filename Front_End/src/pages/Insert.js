@@ -11,7 +11,7 @@ function Insert() {
         try {
             const respose = await axios({
                 method: "post",
-                url: "http://localhost:5000/dummyData",
+                url: "https://visually-talented-grubworm.ngrok-free.app/dummyData",
                 withCredentials: true,
             });
 

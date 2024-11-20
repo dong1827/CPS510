@@ -11,7 +11,7 @@ function Manipulate() {
         try {
             const respose = await axios({
                 method: "post",
-                url: "http://localhost:5000/create",
+                url: "https://visually-talented-grubworm.ngrok-free.app/create",
                 withCredentials: true,
             });
 
@@ -33,7 +33,7 @@ function Manipulate() {
         try {
             const respose = await axios({
                 method: "post",
-                url: "http://localhost:5000/drop",
+                url: "https://visually-talented-grubworm.ngrok-free.app/drop",
                 withCredentials: true,
             });
 

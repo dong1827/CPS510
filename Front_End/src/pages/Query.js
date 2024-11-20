@@ -17,7 +17,7 @@ function Query() {
             
             const respose = await axios({
                 method: "post",
-                url: "http://localhost:5000/query",
+                url: "https://visually-talented-grubworm.ngrok-free.app/query",
                 withCredentials: true,
                 data: {
                     query: query
