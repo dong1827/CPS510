@@ -1,0 +1,87 @@
+body {
+  font-size: medium;
+  background-color: whitesmoke;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+}
+
+#userInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+#welcomePage {
+  display: flex;
+  flex-direction: column;
+}
+
+#LRBox {
+  background-color: lightgrey;
+}
+
+.buttons{
+  min-width: 70px;
+  max-width: 100px;
+  height: 35px;
+  margin-top: 5px;
+}
+
+.centerJustified {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+}
+
+.columnFlex {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.halfHeight {
+  height: 50vh;
+}
+
+.highPadding {
+  padding: 15px;
+}
+
+.topGap {
+  margin-top: 15px;
+}
+
+.lineBreaks {
+  white-space: pre-line;
+}
+
+.rightJustified {
+  margin-left: auto;
+}
+
+.rowFlex {
+  display: flex;
+  gap: 5px;
+}
+
+.solidBorder {
+  border: 2px;
+  border-style: solid;
+  padding: 5px;
+}
+
+.fullWidth {
+  width: 100vw;
+}
+
+.inputBox {
+  width: 300px;
+  height: 20px;
+}
