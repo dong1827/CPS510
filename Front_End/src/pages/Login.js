@@ -22,7 +22,7 @@ function Login() {
         //Send username and password to /login to handle the login request
         axios({
             method: "post",
-            url: "http://localhost:5000/login",
+            url: "https://cps510.onrender.com/login",
             withCredentials: true,
             data: {
                 username: username,

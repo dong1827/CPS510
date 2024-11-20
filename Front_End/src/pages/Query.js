@@ -11,7 +11,7 @@ function Query() {
         try {
             const respose = await axios({
                 method: "post",
-                url: "http://localhost:5000//Query",
+                url: "https://cps510.onrender.com/Query",
                 withCredentials: true,
                 data: {
                     query: query

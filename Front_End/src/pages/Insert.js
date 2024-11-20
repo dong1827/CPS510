@@ -9,7 +9,7 @@ function Insert() {
         try {
             const respose = await axios({
                 method: "post",
-                url: "http://localhost:5000/dummyData",
+                url: "https://cps510.onrender.com/dummyData",
                 withCredentials: true,
             });
 
@@ -28,7 +28,7 @@ function Insert() {
         try {
             const respose = await axios({
                 method: "post",
-                url: "http://localhost:5000/drop",
+                url: "https://cps510.onrender.com/drop",
                 withCredentials: true,
             });
 

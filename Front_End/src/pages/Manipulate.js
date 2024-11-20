@@ -10,7 +10,7 @@ function Manipulate() {
         try {
             const respose = await axios({
                 method: "post",
-                url: "http://localhost:5000/create",
+                url: "https://cps510.onrender.com/create",
                 withCredentials: true,
             });
 
@@ -29,7 +29,7 @@ function Manipulate() {
         try {
             const respose = await axios({
                 method: "post",
-                url: "http://localhost:5000/drop",
+                url: "https://cps510.onrender.com/drop",
                 withCredentials: true,
             });
 
