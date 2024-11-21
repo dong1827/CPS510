@@ -10,7 +10,7 @@ function Query() {
     const [rows, setRows] = useState("");
     const [cols, setCols] = useState("");
     
-
+    // Fetch the query result and store it
     const fetchQuery = async () => {
         setMsg("Loading...");
         try {
@@ -45,6 +45,7 @@ function Query() {
         setMsg("");
     }
 
+    // Event handler for selecting each query
     const selectQuery = (event) => {
         setQuery(event.target.value);
     };
@@ -54,6 +55,7 @@ function Query() {
         <div>
             <HomeButton />
             <h2>Select your query</h2>
+            {/*options for queries*/}
             <label htmlFor='query'>Select a table to view:</label>
             <select id="query" value={query} onChange={selectQuery}>
                 <option value="customer">Customers</option>
@@ -68,9 +70,10 @@ function Query() {
                 <option value="storecredit">StoreCredit</option>
                 <option value="stores">Stores</option>
             </select>
-        
+
             <button className='buttons' onClick={fetchQuery}>Select</button>
 
+            {/*Displaying message and result table*/}
             <div>
                 <p>{msg}</p>
                 <p>{result}</p>

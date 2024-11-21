@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import LRButtons from '../components/LRButtons';
 import LogoutButton from '../components/LogoutButton';
 
-//Start button to redirect the user to choosing their game
+// Buttons for each option
 function QueryButton() {
     return (
         <div> 
@@ -90,13 +90,13 @@ function HomePage() {
 
 
 function Home() {
-    //Check if there's an active session
+    // Check if there's an active session
     const [user, setUser] = useState(null)
     const [points, setPoints] = useState(0)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        //Getting the current user 
+        // Fetching the current user 
         const fetchUser = async () => {
             try {
                 const response = await axios({

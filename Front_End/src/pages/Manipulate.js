@@ -6,6 +6,7 @@ function Manipulate() {
     const [result, setResult] = useState("");
     const [msg, setMsg] = useState("");
 
+    // Send server a create table request
     const createTable = async () => {
         setMsg("Loading...");
         try {
@@ -28,6 +29,7 @@ function Manipulate() {
         setMsg("");
     }
 
+    // Send server a drop table request
     const dropTable = async () => {
         setMsg("Loading...");
         try {

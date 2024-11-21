@@ -10,7 +10,7 @@ function AdvQuery() {
     const [rows, setRows] = useState("");
     const [cols, setCols] = useState("");
     
-
+    // Fetch the advanced query data and store the result
     const fetchAdvQuery = async () => {
         setMsg("Loading...");
         try {
@@ -55,6 +55,7 @@ function AdvQuery() {
             <HomeButton />
             <h2>Select your query</h2>
             <label htmlFor='AdvQuery'>Select a table to view:</label>
+            {/*Options for available queries*/}
             <select id="AdvQuery" value={query} onChange={selectQuery}>
                 <option value="0">Query 1: Customers who have Purchased Both Movies and Music</option>
                 <option value="1">Query 2: Customers Who Either Left a Review or Made a Purchase</option>
@@ -65,6 +66,7 @@ function AdvQuery() {
         
             <button className='buttons' onClick={fetchAdvQuery}>Select</button>
 
+            {/*Display message and result table*/}
             <div>
                 <p>{msg}</p>
                 <p>{result}</p>

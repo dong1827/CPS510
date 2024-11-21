@@ -6,6 +6,7 @@ function Insert() {
     const [result, setResult] = useState("");
     const [msg, setMsg] = useState("");
 
+    // Send server a insert dummy data request
     const dummyData = async () => {
         setMsg("loading...");
         try {
@@ -30,6 +31,7 @@ function Insert() {
         <div className='columnFlex'>
             <HomeButton />
             
+            {/*Interface for insert data*/}
             <div className='centerJustified columnFlex'>
                 <p>Select your action</p>
                 <p>{msg}</p>
