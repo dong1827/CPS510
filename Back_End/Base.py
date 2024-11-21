@@ -11,16 +11,15 @@ CORS(app, supports_credentials=True)
 
 #Establishing a database connection
 def get_connection():
-    #Find other ways to do this
     username = "rdong"
     password = "05014760"
     dsn = "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(Host=oracle12c.scs.ryerson.ca)(Port=1521))(CONNECT_DATA=(SID=orcl12c)))"
 
     try:
+        #Try to connect to the database
         conn = oracledb.connect(user=username, password=password, dsn=dsn)
         return conn
     except oracledb.Error as e:
-        # Change this to something else later
         print(f"An error has occured while connecting to database: {e}")
 
 #Makes session permanent as long as the user leave their browser open
@@ -66,7 +65,7 @@ def register():
 
 
 @app.route('/login', methods = ['post'])
-#Try to log the user in and return whether it was successful
+#Try to log the user in and return whether it was successful or not 
 def login():
     res_body = {"login": "fail"}
 
@@ -90,6 +89,7 @@ def login():
     return res_body
 
 @app.route('/logout', methods = ['post'])
+#Log the user out 
 def logout(): 
     res_body = {"result": "None"}
     session.clear()
@@ -108,10 +108,11 @@ def get_session():
     return res_body
 
 @app.route('/create', methods = ['post'])
-#Creatign table
+#Creating table
 def create_table(): 
     res_body = {"result": "None"}
 
+    #sql statements for each table
     sql_statements = [ 
         """CREATE TABLE Customer (
         Username VARCHAR2(25) PRIMARY KEY,
@@ -193,6 +194,7 @@ def create_table():
 
 
     try:
+        #execute the sql statements
         conn = get_connection()
         cursor = conn.cursor()
         for sql in sql_statements:
@@ -201,7 +203,7 @@ def create_table():
         conn.commit()
         res_body["result"] = "Successfully created tables"
     except oracledb.DatabaseError as e:
-        error_obj, = e.args  # Unpack the error object
+        error_obj, = e.args 
         res_body["result"] = error_obj.message
     
 
@@ -209,7 +211,7 @@ def create_table():
     
 
 @app.route('/drop', methods = ['post'])
-#Creatign table
+#Dropping table
 def drop_table(): 
     res_body = {"result": "None"}
     sql_statements = [
@@ -241,6 +243,7 @@ def drop_table():
     return res_body
 
 @app.route('/dummyData', methods = ['post'])
+#Inserting dummy data
 def dummy_data():
     res_body = {"result": ""}
     sql_statements = [
@@ -367,6 +370,7 @@ def query():
             conn.close()
 
 @app.route('/advQuery', methods = ['post'])
+#Return an advanced query result
 def adv_query(): 
     res_body = {"result": "Success"}
 
